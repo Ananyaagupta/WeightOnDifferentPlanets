@@ -26,12 +26,13 @@ class WeightController(private val weightService: WeightService) {
     }
 
     @PostMapping("/getweight")
-    fun weightOnPlanet(@RequestParam id: Int,  @RequestParam planet: String, @RequestParam weightOnEarth: Int):ResponseEntity<Any> {
+    fun weightOnPlanet(@RequestParam id: Int,@RequestParam name:String,  @RequestParam planet: String, @RequestParam weightOnEarth: Int):ResponseEntity<Any> {
         try {
-            return ResponseEntity.ok(" your weight on $planet is " + weightService.getWeightOnPlanet(id,planet,weightOnEarth))
+            return ResponseEntity.ok(" your weight on $planet is " + weightService.getWeightOnPlanet(id,name,planet,weightOnEarth))
         } catch (e: IdNotFoundException) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.message)
         }
+
     }
 
 }

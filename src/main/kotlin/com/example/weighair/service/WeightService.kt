@@ -12,15 +12,12 @@ class WeightService(private val weightsDAO: WeightsDAO) {
         return weightsDAO.fetchAllWeights(id)
     }
 
-    public fun addId(id: Int) {
-        weightsDAO.addId(id)
-    }
 
     public fun checkIfNull(id: Int, planet: String): Double {
         return weightsDAO.checkIfExists(id, planet)
     }
 
-    public fun setWeight(id: Int, planet: String, weightOnEarth: Int): Double {
+    public fun calculateAndSetWeight(id: Int, planet: String, weightOnEarth: Int): Double {
         var weight: Double? = null
         when (planet) {
             "mercury" -> {
@@ -47,17 +44,43 @@ class WeightService(private val weightsDAO: WeightsDAO) {
                 return weight
             }
 
+            "jupiter" -> {
+                weight = weightOnEarth * 2.34
+                weightsDAO.setWeight(id, planet, weight)
+                return weight
+            }
+
+            "saturn" -> {
+                weight = weightOnEarth * 0.93
+                weightsDAO.setWeight(id, planet, weight)
+                return weight
+            }
+
+            "uranus" -> {
+                weight = weightOnEarth * 0.89
+                weightsDAO.setWeight(id, planet, weight)
+                return weight
+            }
+
+            "neptune" -> {
+                weight = weightOnEarth * 0.65
+                weightsDAO.setWeight(id, planet, weight)
+                return weight
+            }
+
+
         }
         return 0.0
     }
 
-    fun getWeightOnPlanet(id: Int, planet: String, weightOnEarth: Int): Double {
+    fun getWeightOnPlanet(id: Int,name:String, planet: String, weightOnEarth: Int): Double {
         if (getAllWeights(id).isEmpty) {
-            weightsDAO.addId(id)
+            weightsDAO.setIdAndName(id, name)
+
         } else if (checkIfNull(id, planet) != 0.0) {
             return checkIfNull(id, planet)
         }
-        return setWeight(id, planet, weightOnEarth)
+        return calculateAndSetWeight(id, planet, weightOnEarth)
 
     }
 }

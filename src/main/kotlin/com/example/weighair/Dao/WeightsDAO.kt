@@ -10,10 +10,12 @@ class WeightsDAO(private val weightRepository: WeightRepository, private val wei
     fun fetchAllWeights(id:Int) : Optional<WeightList>{
         return  weightRepository.findById(id)
     }
-    fun addId(id: Int){
+    fun setIdAndName(id: Int, name: String){
         weightList.id=id
+        weightList.name = name
         weightRepository.save(weightList)
     }
+
 
     fun checkIfExists(id: Int, planet: String): Double{
         val current : Optional<WeightList> =  weightRepository.findById(id)
@@ -31,6 +33,18 @@ class WeightsDAO(private val weightRepository: WeightRepository, private val wei
             }
             "mars" -> {
                 weightOnPlanet = weightList.weightOnMars
+            }
+            "jupiter" -> {
+                weightOnPlanet = weightList.weightOnJupiter
+            }
+            "saturn" -> {
+                weightOnPlanet = weightList.weightOnSaturn
+            }
+            "uranus" -> {
+                weightOnPlanet = weightList.weightOnUranus
+            }
+            "neptune" -> {
+                weightOnPlanet = weightList.weightOnNeptune
             }
         }
 
@@ -54,6 +68,18 @@ class WeightsDAO(private val weightRepository: WeightRepository, private val wei
             }
             "mars" -> {
                 weightList.weightOnMars = weightOnPlanet
+            }
+            "jupiter" -> {
+                weightList.weightOnJupiter = weightOnPlanet
+            }
+            "saturn" -> {
+                weightList.weightOnSaturn = weightOnPlanet
+            }
+            "uranus" -> {
+                weightList.weightOnUranus = weightOnPlanet
+            }
+            "neptune" -> {
+                weightList.weightOnNeptune = weightOnPlanet
             }
         }
         weightRepository.save(weightList)

@@ -21,7 +21,7 @@ data class WeightList(
 var id: Int,
 
 @Column(name="name")
-private var name: String? = null,
+var name: String? = null,
 
 @Column(name="mercury")
 var weightOnMercury: Double? =null,
@@ -33,5 +33,17 @@ var weightOnVenus: Double? = null,
 var weightOnEarth: Double? = null,
 
 @Column(name="mars")
-var weightOnMars: Double? = null
+var weightOnMars: Double? = null,
+
+@Column(name="jupiter")
+var weightOnJupiter: Double? = null,
+
+@Column(name="saturn")
+var weightOnSaturn: Double? = null,
+
+@Column(name="uranus")
+var weightOnUranus: Double? = null,
+
+@Column(name="neptune")
+var weightOnNeptune: Double? = null
 )
